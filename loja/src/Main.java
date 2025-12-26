@@ -1,3 +1,4 @@
+import modelo.FormaDePagamento;
 import servicos.Restaurante;
 
 import java.util.Scanner;
@@ -19,7 +20,7 @@ public class Main {
             System.out.println("1 - Cadastrar Prato");
             System.out.println("2 - Listar cardapio");
             System.out.println("3 - Abrir pedido");
-            System.out.println("4 Adicionar item ao pedido");
+            System.out.println("4 - Adicionar item ao pedido");
             System.out.println("5 - Fechar pedido");
             System.out.println("0 - Sair");
             System.out.println("Escolha uma opção");
@@ -69,10 +70,32 @@ public class Main {
                     System.out.println("Numero da mesa: ");
                     int mesaFechar = sc.nextInt();
 
-                    restaurante.fecharPedido(mesaFechar);
+                    System.out.println("Forma de pagamento: ");
+                    System.out.println("1 - Pix");
+                    System.out.println("2 - Debito");
+                    System.out.println("3 = Credito (+ 7%)");
+
+                    int opcaoPagamento = sc.nextInt();
+                    FormaDePagamento formaDePagamento = null;
+
+                    switch (opcaoPagamento) {
+                        case 1 -> formaDePagamento = FormaDePagamento.PIX;
+                        case 2 -> formaDePagamento = FormaDePagamento.DEBITO;
+                        case 3 -> formaDePagamento = FormaDePagamento.CREDITO;
+                        default -> System.out.println("Forma de pagamanento invalida");
+
+                    }
+                    if (formaDePagamento == null) {
+                        System.out.println("Pedido não foi fechado");
+                        break;
+
+
+                    }
+
+                    restaurante.fecharPedido(mesaFechar, formaDePagamento);
                     break;
 
-                case 6:
+                case 0:
                     System.out.println("Encerrando o programa");
                     break;
 
@@ -80,13 +103,10 @@ public class Main {
                     System.out.println("Opção invalida!");
 
 
-
             }
         } while (opcao != 0);
         sc.close();
     }
-
-
 
 
 }

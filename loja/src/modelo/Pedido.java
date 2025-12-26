@@ -7,6 +7,21 @@ public class Pedido {
     private int numeroMesa;
     private List<ItemPedido> itens = new ArrayList<>();
     private boolean fechado;
+    private FormaDePagamento formaDePagamento;
+
+    private static final double TAXA_CREDITO = 0.07;
+
+    public void definirFormaDePagamaneto(FormaDePagamento formaDePagamento){
+        this.formaDePagamento = formaDePagamento;
+    }
+    public double calcularTotalFinal(){
+        double tota = calcularTotal();
+
+        if(formaDePagamento == FormaDePagamento.CREDITO){
+            tota =+ tota * TAXA_CREDITO;
+        }
+        return tota;
+    }
 
 
     public Pedido(int numeroMesa) {

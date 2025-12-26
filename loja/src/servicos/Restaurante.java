@@ -1,5 +1,6 @@
 package servicos;
 
+import modelo.FormaDePagamento;
 import modelo.ItemPedido;
 import modelo.Pedido;
 import modelo.Prato;
@@ -66,7 +67,7 @@ public class Restaurante {
         System.out.println("Item adicionado com sucesso");
 
     }
-    public void fecharPedido(int numeroMesa){
+    public void fecharPedido(int numeroMesa, FormaDePagamento formaDePagamento){
         Pedido pedido = buscarPedido(numeroMesa);
 
         if(pedido == null){
@@ -76,6 +77,8 @@ public class Restaurante {
         pedido.fecharPedido();
         System.out.println("Pedido da mesa " + numeroMesa + "fechado");
         System.out.println(("Total: R$ " + pedido.calcularTotal()));
+        System.out.println(("Total final da mesa " +
+                String.format("%.2f",pedido.calcularTotalFinal())));
 
     }
 }
